@@ -95,11 +95,12 @@ func NewWithConfig(config Config) Client {
 	return client
 }
 
-// Verify sends receipts and gets validation result
-func (c *Client) Verify(req IAPRequest, result interface{}) error {
-	client := http.Client{
-		Timeout: c.TimeOut,
-	}
+// Verify sends receipts and gets validation result.
+// (For running with Google App Engine)
+func (c *Client) Verify(cli *http.Client, req IAPRequest, result interface{}) error {
+
+	client := cli
+	client.Timeout = c.TimeOut
 
 	b := new(bytes.Buffer)
 	json.NewEncoder(b).Encode(req)

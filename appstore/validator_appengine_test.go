@@ -1,11 +1,9 @@
-// +build !appengine
+// +build appengine
 
 package appstore
 
 import (
 	"errors"
-	"fmt"
-	"net/http"
 	"os"
 	"reflect"
 	"testing"
@@ -132,28 +130,47 @@ func TestNewWithConfigTimeout(t *testing.T) {
 	}
 }
 
+// @todo Write a test.
 func TestVerify(t *testing.T) {
-	client := New()
-	client.TimeOut = time.Millisecond * 100
+	t.Errorf("@todo Write a test.")
+	// inst, err := aetest.NewInstance(nil)
+	// if err != nil {
+	// 	t.Errorf("error, NewInstance, %s", err)
+	// 	return
+	// }
+	// defer inst.Close()
+	//
+	// r, err := inst.NewRequest("POST", "/", nil)
+	// if err != nil {
+	// 	t.Errorf("error, NewRequest, %s", err)
+	// 	return
+	// }
+	//
+	// ctx := appengine.NewContext(r)
+	// fmt.Printf("ctx, %v\n", ctx)
+	//
+	// client := New()
+	// client.TimeOut = time.Millisecond * 100
+	//
+	// req := IAPRequest{
+	// 	ReceiptData: "dummy data",
+	// }
+	// result := &IAPResponse{}
+	// fmt.Printf("req, %v\nresult, %v\n", req, result)
+	// ufClient := urlfetch.Client(ctx)
+	// err = client.Verify(ufClient, req, result)
+	// if err == nil {
+	// 	t.Errorf("error should be occurred because of timeout")
+	// }
+	//
+	// client = New()
+	// expected := &IAPResponse{
+	// 	Status: 21002,
+	// }
+	// client.Verify(&http.Client{}, req, result)
+	// fmt.Printf("result, \n\tstatus, %d\n\tenviroment %s\n\tlatestReceipt %s\n", result.Status, result.Environment, result.LatestReceipt)
+	// if !reflect.DeepEqual(result, expected) {
+	// 	t.Errorf("got %v\nwant %v", result, expected)
+	// }
 
-	req := IAPRequest{
-		ReceiptData: "dummy data",
-	}
-	result := &IAPResponse{}
-	err := client.Verify(&http.Client{}, req, result)
-	if err == nil {
-		t.Errorf("error should be occurred because of timeout")
-	}
-
-	client = New()
-	expected := &IAPResponse{
-		Status: 21002,
-	}
-	client.Verify(&http.Client{}, req, result)
-	fmt.Printf("result, \n\tstatus, %d\n\tenviroment %s\n\tlatestReceipt %s\n", result.Status, result.Environment, result.LatestReceipt)
-	if !reflect.DeepEqual(result, expected) {
-		t.Errorf("got %v\nwant %v", result, expected)
-	}
-
-	fmt.Println("!appengine")
 }
